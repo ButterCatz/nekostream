@@ -1,0 +1,16 @@
+services:
+  bot:
+    build: .
+    environment:
+      DISCORD_TOKEN: ${DISCORD_TOKEN}
+      AUDIO_INPUT_MODE: ${AUDIO_INPUT_MODE:-raw_tcp}
+      FFMPEG_INPUT_URL: ${FFMPEG_INPUT_URL:-}
+      BOT_LOCALE: ${BOT_LOCALE:-zh-TW}
+      MESSAGE_TEMPLATES_PATH: ${MESSAGE_TEMPLATES_PATH:-config/messages.toml}
+      RUST_LOG: ${RUST_LOG:-info}
+    volumes:
+      - ./data:/app/data
+    ports:
+      - "3030:3030"
+      - "9998:9998/udp"
+    restart: unless-stopped
